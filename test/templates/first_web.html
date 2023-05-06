@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head runat="server">
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title></title>
+	<style>
+		#window-container {
+			display: none;
+			position: fixed;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5);
+		}
+
+		#window-pop {
+			background: white;
+			width: 30%;
+			z-index: 1;
+			margin: 12% auto;
+			overflow: auto;
+			border-radius: 20px;
+		}
+
+		.window-content {
+			width: auto;
+			height: 200px;
+			line-height: 200px;
+			overflow:auto;
+			text-align:center;
+		}
+
+		span {
+			display: inline-block;
+			vertical-align: middle;
+			line-height: normal;
+		}
+	</style>
+	<style type="text/css">
+		/* CSS */
+		.auto-style1 {
+			text-align: center;
+			font-size: 28px;
+			color: white;
+		}
+
+		body {
+			background-image: url('https://xinzhuobu.com/wp-content/uploads/2022/11/20221105002.jpg');
+			background-size: 100%, 100%;
+			opacity: 0.8;
+		}
+
+		#tab {
+			width: 800px;
+			background: #cf84b4;
+			margin-left: auto;
+			margin-right: auto;
+			border: solid 1px #C71585;
+		}
+
+		/* 頁籤ul */
+		#tab>ul {
+			/* overflow: hidden; */
+			margin: 0;
+			padding: 10px 20px 0 20px;
+		}
+
+		#tab>ul>li {
+			list-style-type: none;
+		}
+
+		/* 頁籤上的文字 */
+		#tab>ul>li>a {
+			text-decoration: none;
+			font-size: 15px;
+			color: black;
+			float: left;
+			padding: 10px;
+			margin-left: 5px;
+			font-size: 20px;
+		}
+
+		/*頁籤div內容*/
+		#tab>div {
+			clear: both;
+			padding: 0 15px;
+			height: 0;
+			overflow: hidden;
+			visibility: hidden;
+		}
+
+		#img_color {
+			position: absolute;
+			top: 260px;
+			left: 920px;
+			z-index: 1;
+			width: 100px;
+			height: 350px;
+		}
+
+		#img_LNN {
+			position: absolute;
+			top: 190px;
+			left: 612px;
+			z-index: 11;
+			width: 82px;
+			height: 57px;
+		}
+
+		#img_KNH {
+			position: absolute;
+			top: 250px;
+			left: 595px;
+			z-index: 11;
+			width: 58px;
+			height: 36px;
+		}
+
+		#img_PEH {
+			position: absolute;
+			top: 346px;
+			left: 596px;
+			z-index: 11;
+			width: 58px;
+			height: 102px;
+		}
+
+		#img_TTT {
+			position: absolute;
+			top: 396px;
+			left: 741.7px;
+			z-index: 11;
+			width: 103px;
+			height: 148px;
+		}
+
+		#img_HUN {
+			position: absolute;
+			top: 291.4px;
+			left: 770.8px;
+			z-index: 11;
+			width: 105px;
+			height: 153px;
+		}
+
+		#img_ILA {
+			position: absolute;
+			top: 220.6px;
+			left: 811.7px;
+			z-index: 11;
+			width: 81px;
+			height: 85px;
+		}
+
+		#img_PIF {
+			position: absolute;
+			top: 459.5px;
+			left: 701.9px;
+			z-index: 11;
+			width: 75px;
+			height: 122px;
+		}
+
+		#img_KHH {
+			position: absolute;
+			top: 392.5px;
+			left: 676.6px;
+			z-index: 11;
+			width: 113px;
+			height: 124px;
+		}
+
+		#img_TNN {
+			position: absolute;
+			top: 403.4px;
+			left: 665.9px;
+			z-index: 11;
+			width: 76px;
+			height: 63px;
+		}
+
+		#img_CYI_1 {
+			position: absolute;
+			top: 390px;
+			left: 709px;
+			z-index: 111;
+			width: 14px;
+			height: 11px;
+		}
+
+		#img_CYI_0 {
+			position: absolute;
+			top: 375.1px;
+			left: 675.1px;
+			z-index: 11;
+			width: 97px;
+			height: 55px;
+		}
+
+		#img_YUN {
+			position: absolute;
+			top: 348.5px;
+			left: 670.7px;
+			z-index: 11;
+			width: 83px;
+			height: 50px;
+		}
+
+		#img_CHW {
+			position: absolute;
+			top: 307.9px;
+			left: 686.4px;
+			z-index: 11;
+			width: 56px;
+			height: 58px;
+		}
+
+		#img_NTC {
+			position: absolute;
+			top: 305.3px;
+			left: 726.8px;
+			z-index: 11;
+			;
+			width: 99px;
+			height: 100px;
+		}
+
+		#img_TXG {
+			position: absolute;
+			top: 282.5px;
+			left: 714px;
+			z-index: 11;
+			width: 123px;
+			height: 56px;
+		}
+
+		#img_ZMI {
+			position: absolute;
+			top: 246px;
+			left: 729px;
+			z-index: 11;
+			width: 85px;
+			height: 59px;
+		}
+
+		#img_HSZ_1 {
+			position: absolute;
+			top: 235.3px;
+			left: 764.8px;
+			z-index: 111;
+			width: 20px;
+			height: 21px;
+		}
+
+		#img_HSZ_0 {
+			position: absolute;
+			top: 220.8px;
+			left: 762.3px;
+			z-index: 11;
+			width: 73px;
+			height: 73px;
+		}
+
+		#img_TYN {
+			position: absolute;
+			top: 201.8px;
+			left: 771.7px;
+			z-index: 11;
+			width: 69px;
+			height: 73px;
+		}
+
+		#img_TPE {
+			position: absolute;
+			top: 193.7px;
+			left: 829px;
+			z-index: 111;
+			width: 29px;
+			height: 36px;
+		}
+
+		#img_NTPC {
+			position: absolute;
+			top: 178.7px;
+			left: 801.6px;
+			z-index: 11;
+			;
+			width: 105px;
+			height: 87px;
+		}
+
+		#img_KEL {
+			position: absolute;
+			top: 198.9px;
+			left: 851.2px;
+			z-index: 111;
+			width: 24px;
+			height: 18px;
+		}
+
+
+
+		.box>img {
+			display: block;
+			width: 100%;
+			height: auto;
+			transition: all 0.6s;
+		}
+
+		.box:hover img {
+			transform: scale(1.2);
+		}
+
+		.box:hover .box-hover-text_0 {
+			border-radius: 20px;
+			top: 498px;
+			left: 590px;
+			display: block;
+		}
+
+		.box .box-hover-text_0 {
+			top: 0px;
+			left: 0px;
+			z-index: 11;
+			position: absolute;
+			display: none;
+			background-color: #666666;
+		}
+
+		.box .box-body_0 {
+			color: #fff;
+		}
+
+		h2.box-body_0 {
+			padding: 5px, 10px, 5px, 10px;
+			text-align: center;
+		}
+
+		p.box-body_0 {
+			padding: 15px;
+			line-height: 0.8em;
+		}
+
+		/*第一筆的底色*/
+		span:target~#tab>ul li:first-child a {
+			background: #C71585;
+		}
+
+		span:target~#tab>div:first-of-type {
+			visibility: hidden;
+			height: 0;
+			padding: 0 15px;
+		}
+
+		/*頁籤變換&第一筆*/
+		span~#tab>ul li:first-child a,
+		#tab-1:target~#tab>ul li a[href$="#tab-1"],
+		#tab-2:target~#tab>ul li a[href$="#tab-2"],
+		#tab-3:target~#tab>ul li a[href$="#tab-3"] {
+			background: #fff;
+			border-radius: 5px 5px 0 0;
+			font-size: 20px;
+		}
+
+		span~#tab>ul li:first-child a::before,
+		#tab-1:target~#tab>ul li a[href$="#tab-1"]::before,
+		#tab-2:target~#tab>ul li a[href$="#tab-2"]::before,
+		#tab-3:target~#tab>ul li a[href$="#tab-3"]::before {
+			background-color: white;
+			height: 100%;
+		}
+
+		/*頁籤內容顯示&第一筆*/
+		span~#tab>div:first-of-type,
+		#tab-1:target~#tab>div.tab-content-1,
+		#tab-2:target~#tab>div.tab-content-2,
+		#tab-3:target~#tab>div.tab-content-3 {
+			visibility: visible;
+			height: 500px;
+			background: #fff;
+		}
+
+		span {
+			display: none;
+		}
+
+		nav {
+			font-family: "標楷體";
+			font-size: 22px;
+			text-align: center;
+		}
+
+		#page {
+			font-family: "標楷體";
+			color: black;
+		}
+
+		#reporter {
+			font-family: "標楷體";
+			color: black;
+		}
+
+		#policy {
+			font-family: "標楷體";
+			color: black;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="auto-style1"><a><b>預測COVID-19感染人數變化</b></a></div><br />
+	<!-- HTML -->
+	<span id="tab-1">最新公告</span>
+	<span id="tab-2">預測感染人數變化</span>
+	<span id="tab-3">查詢全國感染人數</span>
+
+	<!-- 頁籤按鈕 -->
+	<div id="tab">
+		<ul>
+			<li><a href="#tab-1">最新公告</a></li>
+			<li><a href="#tab-2">預測感染人數變化</a></li>
+			<li><a href="#tab-3">查詢全國感染人數</a></li>
+		</ul>
+
+		<!-- 頁籤的內容區塊 -->
+		<div class="tab-content-1" style="overflow-x:auto;overflow-y:auto;background:white;">
+			<nav>
+				<br>
+				<a href="#policy" style="text-decoration:none;"> | 居家隔離政策 |</a>
+				<a href="#entry" style="text-decoration:none;"> | 入境檢疫政策 |</a>
+				<a href="#reporter" style="text-decoration:none;"> | 記者會直播 |</a>
+				<a href="#page" style="text-decoration:none;"> | 防疫紀錄片 |</a>
+			</nav>
+
+			<hr>
+			</hr>
+
+			<p id="policy">
+			<h3>居家隔離政策</h3>
+			</p>
+			<a href="https://www.cdc.gov.tw/File/Get/XGdlazlDT998bKWRG9JQyg" target="_blank"
+				title="20221107起接觸者採0+7自主防疫.pdf(另開新視窗)" style="text-decoration:none;">20221107起接觸者採0+7自主防疫.pdf</a>
+
+			<p id="entry">
+			<h3>入境檢疫政策</h3>
+			</p>
+			<a href="https://www.cdc.gov.tw/ArrivalQuarantine/info.html" target="_blank" title="旅客來臺COVID-19入境檢疫及醫療資訊網"
+				style="text-decoration:none;">旅客來臺COVID-19入境檢疫及醫療資訊網</a>
+
+			<p id="reporter">
+			<h3>記者會直播</h3>
+			</p>
+			<iframe width="768" height="432" src="https://www.youtube.com/embed/9BjEq8dAHNM"
+				title="【即時字幕】2022/11/14 14:00 中央流行疫情指揮中心嚴重特殊傳染性肺炎記者會" frameborder="0"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+				allowfullscreen></iframe>
+
+			<p id="page">
+			<h3>臺灣 COVID-19防疫一週年紀錄片</h3>
+			</p>
+			<iframe width="424" height="238" src="https://www.youtube.com/embed/FHSKtyfqGJU"
+				title="《我們》─守護臺灣 COVID-19防疫一週年紀錄片" frameborder="0"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+				allowfullscreen></iframe>
+
+		</div>
+
+		<div class="tab-content-2" style="overflow-x:auto;overflow-y:auto;background:white;">
+			<br><br><br><br>
+
+			<div align="left">
+				<form method="post" action={{url_for('predict')}}>
+					<label for="input_choosedate">
+						<h2>&emsp;&emsp;請選擇天數：</h2>
+					</label>
+					<!--<label>&emsp;&emsp;&emsp;<input type="radio" id="input_choosedate" name="user_input" value="一天" checked>一天</label>-->
+					<br><label>&emsp;&emsp;&emsp;<input type="radio" id="input_choosedate" name="user_input"
+							value="一周">一周</label>
+					<br><label>&emsp;&emsp;&emsp;<input type="radio" id="input_choosedate" name="user_input"
+							value="一月">一月</label>
+					<br><br>
+					<!--<input type="submit">-->
+					&emsp;&emsp;&emsp;<button type="submit" class="btn btn-primary"
+						onclick="customizeWindowEvent()">預測</button>
+				</form>
+			</div>
+			<div id="window-container">
+				<div id="window-pop">
+					<div class="window-content">
+						<span>預測中...</span>
+					</div>
+				</div>
+			</div>
+			<script>
+				
+				function customizeWindowEvent() {
+					var popup_window = document.getElementById("window-container");
+					popup_window.style.display = "block";
+					window.onclick = function close(e) {
+						if (e.target == popup_window) {
+							popup_window.style.display = "none";
+						}
+					}
+				}
+			</script>
+			<!------------------------------------------------------1-------------------------------------------------------->
+
+			<img src="https://github.com/zu-z/project/blob/main/%E9%A1%8F%E8%89%B2%E5%8D%80%E9%96%93.png?raw=true"
+				alt="感染人數變化" data-elem="pinchzoomer" class="img-responsive" align="right" id='img_color'>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E9%80%A3%E6%B1%9F/img/1.png?raw=true" alt="感染人數變化"
+					data-elem="pinchzoomer" class="img-responsive" align="right" id='img_LNN'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 連江縣 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E9%87%91%E9%96%80/img/1.png?raw=true" alt="感染人數變化"
+					data-elem="pinchzoomer" class="img-responsive" align="right" id='img_KNH'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 金門縣 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E6%BE%8E%E6%B9%96/img/1.png?raw=true" alt="感染人數變化"
+					data-elem="pinchzoomer" class="img-responsive" align="right" id='img_PEH'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 澎湖縣 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E5%8F%B0%E6%9D%B1/img/1.png?raw=true" alt="感染人數變化"
+					data-elem="pinchzoomer" class="img-responsive" align="right" id='img_TTT'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 台東縣 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E8%8A%B1%E8%93%AE/img/1.png?raw=true" alt="感染人數變化"
+					data-elem="pinchzoomer" class="img-responsive" align="right" id='img_HUN'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 花蓮縣 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E5%AE%9C%E8%98%AD/img/1.png?raw=true" alt="感染人數變化"
+					data-elem="pinchzoomer" class="img-responsive" align="right" id='img_ILA'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 宜蘭縣 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E5%B1%8F%E6%9D%B1/img/1.png?raw=true" alt="感染人數變化"
+					data-elem="pinchzoomer" class="img-responsive" align="right" id='img_PIF'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 屏東縣 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/0d11a4851e55ec7760d0def41ee99dbcb3dafbaf/%E9%AB%98%E9%9B%84%E5%B8%82/img/1.png?raw=true"
+					alt="感染人數變化" data-elem="pinchzoomer" class="img-responsive" align="right" id='img_KHH'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 高雄市 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E5%8F%B0%E5%8D%97%E5%B8%82/img/1.png?raw=true"
+					alt="感染人數變化" data-elem="pinchzoomer" class="img-responsive" align="right" id='img_TNN'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 台南市 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E5%98%89%E7%BE%A9%E5%B8%82/img/1.png?raw=true"
+					alt="感染人數變化" data-elem="pinchzoomer" class="img-responsive" align="right" id='img_CYI_1'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 嘉義市 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E5%98%89%E7%BE%A9%E7%B8%A3/img/1.png?raw=true"
+					alt="感染人數變化" data-elem="pinchzoomer" class="img-responsive" align="right" id='img_CYI_0'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 嘉義縣 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E9%9B%B2%E6%9E%97/img/1.png?raw=true" alt="感染人數變化"
+					data-elem="pinchzoomer" class="img-responsive" align="right" id='img_YUN'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 雲林縣 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E5%8D%97%E6%8A%95/img/1.png?raw=true" alt="感染人數變化"
+					data-elem="pinchzoomer" class="img-responsive" align="right" id='img_NTC'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 南投縣 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E5%BD%B0%E5%8C%96/img/1.png?raw=true" alt="感染人數變化"
+					data-elem="pinchzoomer" class="img-responsive" align="right" id='img_CHW'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 彰化縣 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E5%8F%B0%E4%B8%AD/img/1.png?raw=true" alt="感染人數變化"
+					data-elem="pinchzoomer" class="img-responsive" align="right" id='img_TXG'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 台中市 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E8%8B%97%E6%A0%97/img/1.png?raw=true"
+					data-elem="pinchzoomer" class="img-responsive" align="right" id='img_ZMI'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 苗栗縣 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E6%96%B0%E7%AB%B9%E5%B8%82/img/1.png?raw=true"
+					alt="感染人數變化" data-elem="pinchzoomer" class="img-responsive" align="right" id='img_HSZ_1'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 新竹市 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E6%96%B0%E7%AB%B9%E7%B8%A3/img/1.png?raw=true"
+					alt="感染人數變化" data-elem="pinchzoomer" class="img-responsive" align="right" id='img_HSZ_0'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 新竹縣 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E6%A1%83%E5%9C%92/img/1.png?raw=true" alt="感染人數變化"
+					data-elem="pinchzoomer" class="img-responsive" align="right" id='img_TYN'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 桃園市 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E5%8F%B0%E5%8C%97/img/1.png?raw=true" alt="感染人數變化"
+					data-elem="pinchzoomer" class="img-responsive" align="right" id='img_TPE'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 台北市 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E6%96%B0%E5%8C%97/img/1.png?raw=true" alt="感染人數變化"
+					data-elem="pinchzoomer" class="img-responsive" align="right" id='img_NTPC'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 新北市 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E5%9F%BA%E9%9A%86/img/1.png?raw=true" alt="感染人數變化"
+					data-elem="pinchzoomer" class="img-responsive" align="right" id='img_KEL'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 基隆市 </h2>
+				</div>
+			</div>
+		</div>
+
+		<div class="tab-content-3">
+			<br><br><br><br>
+
+			<div align="left">
+				<form method="post" action={{url_for('second_web')}}>
+					<label for="input_choosedate">
+						<h2>&emsp;&emsp;請選擇天數：</h2>
+					</label>
+					<label>&emsp;&emsp;&emsp;<input type="radio" id="input_choosedate" name="user_input" value="一天"
+							checked>一天</label>
+					<br><label>&emsp;&emsp;&emsp;<input type="radio" id="input_choosedate" name="user_input"
+							value="一周">一周</label>
+					<br><label>&emsp;&emsp;&emsp;<input type="radio" id="input_choosedate" name="user_input"
+							value="一月">一月</label>
+					<br><br>
+					<label for="input_date">
+						<h2>&emsp;&emsp;請選擇日期：</h2>
+					</label>
+					&emsp;&emsp;&emsp;<input type="date" id="input_date" name="user_date" value="2020-02-01"
+						min="2020-02-01" max="2022-11-01">
+					<br><br>
+					<!--<input type="submit">-->
+					&emsp;&emsp;&emsp;<button type="submit" class="btn btn-primary">查詢</button>
+				</form>
+			</div>
+
+			<!------------------------------------------------------1-------------------------------------------------------->
+
+			<img src="https://github.com/zu-z/project/blob/main/%E9%A1%8F%E8%89%B2%E5%8D%80%E9%96%93.png?raw=true"
+				alt="感染人數變化" data-elem="pinchzoomer" class="img-responsive" align="right" id='img_color'>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E9%80%A3%E6%B1%9F/img/1.png?raw=true" alt="感染人數變化"
+					data-elem="pinchzoomer" class="img-responsive" align="right" id='img_LNN'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 連江縣 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E9%87%91%E9%96%80/img/1.png?raw=true" alt="感染人數變化"
+					data-elem="pinchzoomer" class="img-responsive" align="right" id='img_KNH'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 金門縣 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E6%BE%8E%E6%B9%96/img/1.png?raw=true" alt="感染人數變化"
+					data-elem="pinchzoomer" class="img-responsive" align="right" id='img_PEH'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 澎湖縣 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E5%8F%B0%E6%9D%B1/img/1.png?raw=true" alt="感染人數變化"
+					data-elem="pinchzoomer" class="img-responsive" align="right" id='img_TTT'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 台東縣 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E8%8A%B1%E8%93%AE/img/1.png?raw=true" alt="感染人數變化"
+					data-elem="pinchzoomer" class="img-responsive" align="right" id='img_HUN'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 花蓮縣 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E5%AE%9C%E8%98%AD/img/1.png?raw=true" alt="感染人數變化"
+					data-elem="pinchzoomer" class="img-responsive" align="right" id='img_ILA'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 宜蘭縣 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E5%B1%8F%E6%9D%B1/img/1.png?raw=true" alt="感染人數變化"
+					data-elem="pinchzoomer" class="img-responsive" align="right" id='img_PIF'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 屏東縣 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/0d11a4851e55ec7760d0def41ee99dbcb3dafbaf/%E9%AB%98%E9%9B%84%E5%B8%82/img/1.png?raw=true"
+					alt="感染人數變化" data-elem="pinchzoomer" class="img-responsive" align="right" id='img_KHH'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 高雄市 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E5%8F%B0%E5%8D%97%E5%B8%82/img/1.png?raw=true"
+					alt="感染人數變化" data-elem="pinchzoomer" class="img-responsive" align="right" id='img_TNN'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 台南市 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E5%98%89%E7%BE%A9%E5%B8%82/img/1.png?raw=true"
+					alt="感染人數變化" data-elem="pinchzoomer" class="img-responsive" align="right" id='img_CYI_1'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 嘉義市 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E5%98%89%E7%BE%A9%E7%B8%A3/img/1.png?raw=true"
+					alt="感染人數變化" data-elem="pinchzoomer" class="img-responsive" align="right" id='img_CYI_0'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 嘉義縣 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E9%9B%B2%E6%9E%97/img/1.png?raw=true" alt="感染人數變化"
+					data-elem="pinchzoomer" class="img-responsive" align="right" id='img_YUN'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 雲林縣 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E5%8D%97%E6%8A%95/img/1.png?raw=true" alt="感染人數變化"
+					data-elem="pinchzoomer" class="img-responsive" align="right" id='img_NTC'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 南投縣 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E5%BD%B0%E5%8C%96/img/1.png?raw=true" alt="感染人數變化"
+					data-elem="pinchzoomer" class="img-responsive" align="right" id='img_CHW'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 彰化縣 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E5%8F%B0%E4%B8%AD/img/1.png?raw=true" alt="感染人數變化"
+					data-elem="pinchzoomer" class="img-responsive" align="right" id='img_TXG'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 台中市 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E8%8B%97%E6%A0%97/img/1.png?raw=true"
+					data-elem="pinchzoomer" class="img-responsive" align="right" id='img_ZMI'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 苗栗縣 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E6%96%B0%E7%AB%B9%E5%B8%82/img/1.png?raw=true"
+					alt="感染人數變化" data-elem="pinchzoomer" class="img-responsive" align="right" id='img_HSZ_1'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 新竹市 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E6%96%B0%E7%AB%B9%E7%B8%A3/img/1.png?raw=true"
+					alt="感染人數變化" data-elem="pinchzoomer" class="img-responsive" align="right" id='img_HSZ_0'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 新竹縣 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E6%A1%83%E5%9C%92/img/1.png?raw=true" alt="感染人數變化"
+					data-elem="pinchzoomer" class="img-responsive" align="right" id='img_TYN'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 桃園市 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E5%8F%B0%E5%8C%97/img/1.png?raw=true" alt="感染人數變化"
+					data-elem="pinchzoomer" class="img-responsive" align="right" id='img_TPE'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 台北市 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E6%96%B0%E5%8C%97/img/1.png?raw=true" alt="感染人數變化"
+					data-elem="pinchzoomer" class="img-responsive" align="right" id='img_NTPC'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 新北市 </h2>
+				</div>
+			</div>
+
+			<div class="box">
+				<img src="https://github.com/zu-z/project/blob/main/%E5%9F%BA%E9%9A%86/img/1.png?raw=true" alt="感染人數變化"
+					data-elem="pinchzoomer" class="img-responsive" align="right" id='img_KEL'>
+				<div class="box-hover-text_0">
+					<h2 class="box-body_0"> 基隆市 </h2>
+				</div>
+			</div>
+		</div>
+
+</body>
+
+</html>
