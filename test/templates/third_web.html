@@ -19,78 +19,79 @@
 	</style>
 	<script type="text/javascript">
 		function draw() {
-			var e = document.getElementById("balabala");
-			var value = e.value;
-			var data = [];
-			var tempdata =[];
-			
-			if(value=="Tapei"){
-				tempdata=Taipei;
-			}
-			else if(value="Taichung"){
-				tempdata=Taichung;
-			}
-			else if(value="Taitung"){
-				tempdata=Taitung ;
-			}
-			else if(value="Tainan"){
-				tempdata=Tainan;
-			}
-			else if(value="Yilan"){
-				tempdata=Yilan;
-			}
-			else if(value="Hualien"){
-				tempdata=Hualien;
-			}
-			else if(value="Kinmen"){
-				tempdata=Kinmen;
-			}
-			else if(value="Nantou"){
-				tempdata=Nantou;
-			}
-			else if(value="Pingtung"){
-				tempdata=Pingtung;
-			}
-			else if(value="Miaoli"){
-				tempdata=Miaoli;
-			}
-			else if(value="Taoyuan"){
-				tempdata=Taoyuan;
-			}
-			else if(value="Kaohsiung"){
-				tempdata=Kaohsiung;
-			}
-			else if(value="Keelung"){
-				tempdata=Keelung;
-			}
-			else if(value="Lienchiang"){
-				tempdata=Lienchiang;
-			}
-			else if(value="Yunlin"){
-				tempdata=Yunlin;
-			}
-			else if(value="New_Taipei"){
-				tempdata=New_Taipei;
-			}
-			else if(value="Hsinchu_City"){
-				tempdata=Hsinchu_City;
-			}
-			else if(value="Hsinchu_County"){
-				tempdata=Hsinchu_County;
-			}
-			else if(value="Chiayi_City"){
-				tempdata=Chiayi_City;
-			}
-			else if(value="Chiayi_County"){
-				tempdata=Chiayi_County;
-			}
-			else if(value="Changhua"){
-				tempdata=Changhua;
-			}
-			else if(value="Penghu"){
-				tempdata=Penghu;
-			}
+
 			anychart.onDocumentReady(function () {
+				var e = document.getElementById("balabala");
+				var value = e.value;
+				var data = [];
+				var tempdata = [];
+				if (value == "Taipei") {
+					tempdata = Taipei;
+				}
+				else if (value = "Taichung") {
+					tempdata = Taichung;
+				}
+				else if (value = "Taitung") {
+					tempdata = Taitung;
+				}
+				else if (value = "Tainan") {
+					tempdata = Tainan;
+				}
+				else if (value = "Yilan") {
+					tempdata = Yilan;
+				}
+				else if (value = "Hualien") {
+					tempdata = Hualien;
+				}
+				else if (value = "Kinmen") {
+					tempdata = Kinmen;
+				}
+				else if (value = "Nantou") {
+					tempdata = Nantou;
+				}
+				else if (value = "Pingtung") {
+					tempdata = Pingtung;
+				}
+				else if (value = "Miaoli") {
+					tempdata = Miaoli;
+				}
+				else if (value = "Taoyuan") {
+					tempdata = Taoyuan;
+				}
+				else if (value = "Kaohsiung") {
+					tempdata = Kaohsiung;
+				}
+				else if (value = "Keelung") {
+					tempdata = Keelung;
+				}
+				else if (value = "Lienchiang") {
+					tempdata = Lienchiang;
+				}
+				else if (value = "Yunlin") {
+					tempdata = Yunlin;
+				}
+				else if (value = "New_Taipei") {
+					tempdata = New_Taipei;
+				}
+				else if (value = "Hsinchu_City") {
+					tempdata = Hsinchu_City;
+				}
+				else if (value = "Hsinchu_County") {
+					tempdata = Hsinchu_County;
+				}
+				else if (value = "Chiayi_City") {
+					tempdata = Chiayi_City;
+				}
+				else if (value = "Chiayi_County") {
+					tempdata = Chiayi_County;
+				}
+				else if (value = "Changhua") {
+					tempdata = Changhua;
+				}
+				else if (value = "Penghu") {
+					tempdata = Penghu;
+				}
+				alert(value);
 				var predict_days = Keelung.length;
 				var currentday = new Date();
 				var today = currentday;
@@ -165,6 +166,7 @@
 				// draw the resulting chart
 				chart.draw();
 				chart.data(newchart);
+
 			});
 		}
 
