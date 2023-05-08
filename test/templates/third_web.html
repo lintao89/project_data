@@ -15,85 +15,19 @@
 			height: 100%;
 			margin: 0;
 			padding: 0;
+			z-index: 999;
 		}
 	</style>
 	<script type="text/javascript">
 		function draw() {
-
 			anychart.onDocumentReady(function () {
 				var e = document.getElementById("balabala");
-				var value = e.value;
-				var data = [];
-				var tempdata = [];
-				if (value == "Taipei") {
-					tempdata = Taipei;
-				}
-				else if (value = "Taichung") {
-					tempdata = Taichung;
-				}
-				else if (value = "Taitung") {
-					tempdata = Taitung;
-				}
-				else if (value = "Tainan") {
-					tempdata = Tainan;
-				}
-				else if (value = "Yilan") {
-					tempdata = Yilan;
-				}
-				else if (value = "Hualien") {
-					tempdata = Hualien;
-				}
-				else if (value = "Kinmen") {
-					tempdata = Kinmen;
-				}
-				else if (value = "Nantou") {
-					tempdata = Nantou;
-				}
-				else if (value = "Pingtung") {
-					tempdata = Pingtung;
-				}
-				else if (value = "Miaoli") {
-					tempdata = Miaoli;
-				}
-				else if (value = "Taoyuan") {
-					tempdata = Taoyuan;
-				}
-				else if (value = "Kaohsiung") {
-					tempdata = Kaohsiung;
-				}
-				else if (value = "Keelung") {
-					tempdata = Keelung;
-				}
-				else if (value = "Lienchiang") {
-					tempdata = Lienchiang;
-				}
-				else if (value = "Yunlin") {
-					tempdata = Yunlin;
-				}
-				else if (value = "New_Taipei") {
-					tempdata = New_Taipei;
-				}
-				else if (value = "Hsinchu_City") {
-					tempdata = Hsinchu_City;
-				}
-				else if (value = "Hsinchu_County") {
-					tempdata = Hsinchu_County;
-				}
-				else if (value = "Chiayi_City") {
-					tempdata = Chiayi_City;
-				}
-				else if (value = "Chiayi_County") {
-					tempdata = Chiayi_County;
-				}
-				else if (value = "Changhua") {
-					tempdata = Changhua;
-				}
-				else if (value = "Penghu") {
-					tempdata = Penghu;
-				}
-				alert(value);
-				var predict_days = Keelung.length;
-				var currentday = new Date();
+				var value=e.value;
+				var data = [];//放日期跟人數
+				var tempdata = [];//放人數的 後面會把數值一起塞進data裡面
+				e.value=value;
+				var predict_days = Keelung.length;//底下生產日期的迴圈會用到
+				var currentday = new Date();//產生第一天日期以及格式化成"月/日"的形式
 				var today = currentday;
 				today.setDate(today.getDate());
 				console.log('${today.toDateString()}');
@@ -104,7 +38,7 @@
 
 				const dates = [today];
 
-				for (let i = 1; i < predict_days; i++) {
+				for (let i = 1; i < predict_days; i++) {//產生日期陣列
 					var endDate = currentday;
 					endDate.setDate(endDate.getDate());
 					var dd = String(endDate.getDate() + i).padStart(2, '0');
@@ -113,6 +47,81 @@
 					endDate = mm + '/' + dd;//+ '/'+ yyyy;
 					dates.push(endDate);
 					console.log('${endDate.toDateString()}');
+				}
+				console.log("TPE:"+Taipei+"\nTaichung:"+Taichung+"\nTaitung:"+Taitung+"\nTainan:"+Tainan+"\nYilan:"+Yilan);
+				console.log("Hualien:"+Hualien+"\nKinmen:"+Kinmen+"\nNantou:"+Nantou+"\nPingtung:"+Pingtung+"\nMiaoli:"+Miaoli);
+				console.log("Taoyuan:"+Taoyuan+"\nKaohsiung:"+Kaohsiung+"\nKeelung:"+Keelung+"\nLienchiang:"+Lienchiang+"\nYunlin:"+Yunlin);
+				console.log("New_Taipei:"+New_Taipei+"\nHsinchu_City:"+Hsinchu_City+"\nHsinchu_County:"+Hsinchu_County+"\nChiayi_City:"+Tainan+"\nChiayi_County"+Chiayi_County);
+				console.log("Changhua:"+Changhua+"\nPenghu:"+Penghu);
+
+				//
+				if (e.value == "Taipei") {
+					tempdata = value;
+				}
+				if (e.value == "Taichung") {
+					tempdata = value;
+
+				}
+				if (e.value == "Taitung") {
+					tempdata = Taitung;
+
+				}
+				if (e.value == "Tainan") {
+					tempdata = Tainan;
+				}
+				if (e.value == "Yilan") {
+					tempdata = Yilan;
+				}
+				if (e.value = "Hualien") {
+					tempdata = Hualien;
+				}
+				if (e.value == "Kinmen") {
+					tempdata = Kinmen;
+				}
+				if (e.value == "Nantou") {
+					tempdata = Nantou;
+				}
+				if (e.value == "Pingtung") {
+					tempdata = Pingtung;
+				}
+				if (e.value == "Miaoli") {
+					tempdata = Miaoli;
+				}
+				if (e.value == "Taoyuan") {
+					tempdata = Taoyuan;
+				}
+				if (e.value == "Kaohsiung") {
+					tempdata = Kaohsiung;
+				}
+				if (e.value == "Keelung") {
+					tempdata = Keelung;
+				}
+				if (e.value == "Lienchiang") {
+					tempdata = Lienchiang;
+				}
+				if (e.value == "Yunlin") {
+					tempdata = Yunlin;
+				}
+				if (e.value =="New_Taipei") {
+					tempdata = New_Taipei;
+				}
+				if (e.value == "Hsinchu_City") {
+					tempdata = Hsinchu_City;
+				}
+				if (e.value == "Hsinchu_County") {
+					tempdata = Hsinchu_County;
+				}
+				if (e.value == "Chiayi_City") {
+					tempdata = Chiayi_City;
+				}
+				if (e.value == "Chiayi_County") {
+					tempdata = Chiayi_County;
+				}
+				if (e.value == "Changhua") {
+					tempdata = Changhua;
+				}
+				if (e.value == "Penghu") {
+					tempdata = Penghu;
 				}
 				for (let i = 0; i < predict_days; i++) {
 					data.push([dates[i], tempdata[i]]);
@@ -123,15 +132,15 @@
 
 				// map the data for all series
 				var firstSeriesData = dataSet.mapAs({ x: 0, value: 1 });
-				var secondSeriesData = dataSet.mapAs({ x: 0, value: 2 });
-				var thirdSeriesData = dataSet.mapAs({ x: 0, value: 3 });
+				//var secondSeriesData = dataSet.mapAs({ x: 0, value: 2 });
+				//var thirdSeriesData = dataSet.mapAs({ x: 0, value: 3 });
 
 				// create a line chart
 				var chart = anychart.line();
-
+				e.value=value;
 				// create the series and name them
 				var firstSeries = chart.line(firstSeriesData);
-				firstSeries.name(value);
+				firstSeries.name(e.value);
 				/*
 				var secondSeries = chart.line(secondSeriesData);
 				secondSeries.name("Rafael Nadal");
@@ -165,7 +174,6 @@
 
 				// draw the resulting chart
 				chart.draw();
-				chart.data(newchart);
 
 			});
 		}
@@ -1622,13 +1630,7 @@
 </head>
 
 <body>
-	<div id="window-container">
-		<div id="window-pop">
-			<div class="window-content">
-				<span>You can display content here!</span>
-			</div>
-		</div>
-	</div>
+
 	<div class="auto-style1"><a><b>預測COVID-19感染人數變化</b></a></div><br />
 	<!-- HTML -->
 	<span id="tab-3">預測感染人數變化</span>
@@ -1657,12 +1659,12 @@
 			</div>
 			<br>
 			<tab>
-				<form method="post">
+				<form>
 					<div align="left">
 						<h2>&emsp;查看各縣市折線圖:</h2>
 						&emsp;&emsp;
 						<select id="balabala" style="font-size:20px;" onchange="draw()">
-							<option value="Value">請選擇縣市</option>
+							<option value="Taipei">請選擇縣市</option>
 							<option value="Taipei">台北市</option>
 							<option value="Taichung">台中市</option>
 							<option value="Taitung">台東縣</option>
@@ -1687,8 +1689,6 @@
 							<option value="Penghu">澎湖縣</option>
 						</select>
 					</div>
-
-					<img id="plot" src="" style="visibility: hidden;" height="250" width="300" />
 				</form>
 				<div id="container"></div>
 				<!------------------------------------------------------3-------------------------------------------------------->
