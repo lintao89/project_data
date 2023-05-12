@@ -699,28 +699,18 @@
 		<div class="tab-content-3">
 			<br><br><br><br>
 
-			<div align="left">
+			<div align="left" style="overflow-x:auto;overflow-y:auto;background:white;">
 				<form method="post" action={{url_for('second_web')}}>
-					<label for="input_choosedate">
-						<h2>&emsp;&emsp;請選擇天數：</h2>
-					</label>
-					<label>&emsp;&emsp;&emsp;<input type="radio" id="input_choosedate" name="user_input" value="一天"
-							checked>一天</label>
-					<br><label>&emsp;&emsp;&emsp;<input type="radio" id="input_choosedate" name="user_input"
-							value="一周">一周</label>
-					<br><label>&emsp;&emsp;&emsp;<input type="radio" id="input_choosedate" name="user_input"
-							value="一月">一月</label>
-					<br><br>
-					<label for="input_date">
-						<h2>&emsp;&emsp;請選擇日期：</h2>
-					</label>
-					&emsp;&emsp;&emsp;<input type="date" id="input_date" name="user_date" value="2020-02-01"
-						min="2020-02-01" max="2022-11-01">
-					<br><br>
-					<!--<input type="submit">-->
-					&emsp;&emsp;&emsp;<button type="submit" class="btn btn-primary">查詢</button>
+				<label for="input_choosedate"><h2>&emsp;&emsp;請選擇天數：</h2></label>
+				<label>&emsp;&emsp;&emsp;<input type="radio" id="input_choosedate" name="user_input" value="一天" checked>一天</label>
+				<br><label>&emsp;&emsp;&emsp;<input type="radio" id="input_choosedate" name="user_input" value="一周">一周</label>
+				<br><label>&emsp;&emsp;&emsp;<input type="radio" id="input_choosedate" name="user_input" value="一月">一月</label>
+				<label for="input_date"><h2>&emsp;&emsp;請選擇日期：</h2></label>
+				&emsp;&emsp;&emsp;<input type="date" id="input_date" name="user_date" value="2020-03-01" min="2020-03-01" max="2022-11-01">
+				<!--<input type="submit">-->
+				&emsp;&emsp;&emsp;<button type="submit" class="btn btn-primary">查詢</button>
 				</form>
-			</div>
+		  </div>
 
 			<!------------------------------------------------------1-------------------------------------------------------->
 
