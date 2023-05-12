@@ -15,56 +15,109 @@
 			height: 100%;
 			margin: 0;
 			padding: 0;
-			z-index: 999;
 		}
 	</style>
+	<script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/utc.js"></script>
 	<script type="text/javascript">
+
+
 		function draw() {
 			anychart.onDocumentReady(function () {
+				//chart.clearInterval();
+
 				var e = document.getElementById("balabala");
-				var value=e.value;
-				var data = [];//放日期跟人數
-				var tempdata = [];//放人數的 後面會把數值一起塞進data裡面
-				e.value=value;
+				let value = e.value;
+				let data = [];//放日期跟人數
+				let tempdata = [];//放人數的 後面會把數值一起塞進data裡面
+				e.value = value;
 				var predict_days = Keelung.length;//底下生產日期的迴圈會用到
 				var currentday = new Date();//產生第一天日期以及格式化成"月/日"的形式
 				var today = currentday;
 				today.setDate(today.getDate());
-				console.log('${today.toDateString()}');
-				var dd = String(today.getDate()).padStart(2, '0');
-				var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+				let dd = String(today.getDate()).padStart(2, '0');
+				let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
 				//var yyyy = today.getFullYear();
 				today = mm + '/' + dd;// + '/' + yyyy;
 
 				const dates = [today];
 
 				for (let i = 1; i < predict_days; i++) {//產生日期陣列
-					var endDate = currentday;
+					var flag = new Boolean(false);
+					let endDate = currentday;
 					endDate.setDate(endDate.getDate());
-					var dd = String(endDate.getDate() + i).padStart(2, '0');
-					var mm = String(endDate.getMonth() + 1).padStart(2, '0'); //January is 0!
-					//var yyyy = endDate.getFullYear();
+					let dd = String(endDate.getDate() + i).padStart(2, '0');
+					let mm = String(endDate.getMonth() + 1).padStart(2, '0'); //January is 0!
+					var yyyy = endDate.getFullYear();
+					
+					console.log(endDate.getDate() + i);
+					console.log(endDate.getMonth() + i);
+					let nextMonth;
+					let currentMonth=mm;
+					if (currentMonth === 12) {
+						nextMonth = 1;
+						currentYear += 1;
+					} else {
+						nextMonth = currentMonth + 1;
+					}
+					let monthMaxDay;
+					let bigMonth = [1, 3, 5, 7, 8, 10, 12];
+
+					// 2月
+					if (nextMonth === 2) {
+						// 潤月 || 非潤月
+						currentYear % 4 === 0 && currentYear % 100 !== 0 || currentYear % 400 === 0 ? monthMaxDay = 29 : monthMaxDay = 28;
+					}
+					else {
+						// 不是大月就是小月
+						bigMonth.includes(nextMonth) ? monthMaxDay = 31 : monthMaxDay = 30;
+					} 
+					/*
+					let currentYear = dayjs().year(); // 本年
+					let currentMonth = dayjs().month() + 1; // 本月，dayjs 的月份值是「該月 - 1」，因此要 +1 回來
+
+					// 本月如果是 1 月，上個月就要是 12 月，並且年份減 1
+					let nextMonth;
+					if (currentMonth === 12) {
+						nextMonth = 1;
+						currentYear += 1;
+					} else {
+						nextMonth = currentMonth + 1;
+					}
+
+					// 計算每個月的最大天數
+					// 如果「年」能被 4整除且不被 100整除，或能被 400整除，2月就是 29天，否則為 28天
+					// 1, 3, 5, 7, 8, 10, 12 為大月，其它為小月
+					let monthMaxDay;
+					let bigMonth = [1, 3, 5, 7, 8, 10, 12];
+
+					// 2月
+					if (nextMonth === 2) {
+						// 潤月 || 非潤月
+						currentYear % 4 === 0 && currentYear % 100 !== 0 || currentYear % 400 === 0 ? monthMaxDay = 29 : monthMaxDay = 28;
+					}
+					else {
+						// 不是大月就是小月
+						bigMonth.includes(nextMonth) ? monthMaxDay = 31 : monthMaxDay = 30;
+					}
+
+					// 用 dayjs 進行補 0
+					let startDate = dayjs('${currentYear}-${nextMonth}+1').format('MM/DD') + '00:00';
+					endDate = dayjs('${currentYear}-${nextMonth}-${monthMaxDay}').format('MM/DD') + '00:00';
+*/
 					endDate = mm + '/' + dd;//+ '/'+ yyyy;
 					dates.push(endDate);
-					console.log('${endDate.toDateString()}');
 				}
-				console.log("TPE:"+Taipei+"\nTaichung:"+Taichung+"\nTaitung:"+Taitung+"\nTainan:"+Tainan+"\nYilan:"+Yilan);
-				console.log("Hualien:"+Hualien+"\nKinmen:"+Kinmen+"\nNantou:"+Nantou+"\nPingtung:"+Pingtung+"\nMiaoli:"+Miaoli);
-				console.log("Taoyuan:"+Taoyuan+"\nKaohsiung:"+Kaohsiung+"\nKeelung:"+Keelung+"\nLienchiang:"+Lienchiang+"\nYunlin:"+Yunlin);
-				console.log("New_Taipei:"+New_Taipei+"\nHsinchu_City:"+Hsinchu_City+"\nHsinchu_County:"+Hsinchu_County+"\nChiayi_City:"+Tainan+"\nChiayi_County"+Chiayi_County);
-				console.log("Changhua:"+Changhua+"\nPenghu:"+Penghu);
 
 				//
 				if (e.value == "Taipei") {
-					tempdata = value;
+					tempdata = Taipei;
 				}
 				if (e.value == "Taichung") {
-					tempdata = value;
-
+					tempdata = Taichung;
 				}
 				if (e.value == "Taitung") {
 					tempdata = Taitung;
-
 				}
 				if (e.value == "Tainan") {
 					tempdata = Tainan;
@@ -72,12 +125,14 @@
 				if (e.value == "Yilan") {
 					tempdata = Yilan;
 				}
-				if (e.value = "Hualien") {
+				if (e.value == "Hualien") {
 					tempdata = Hualien;
 				}
+
 				if (e.value == "Kinmen") {
 					tempdata = Kinmen;
 				}
+
 				if (e.value == "Nantou") {
 					tempdata = Nantou;
 				}
@@ -102,7 +157,7 @@
 				if (e.value == "Yunlin") {
 					tempdata = Yunlin;
 				}
-				if (e.value =="New_Taipei") {
+				if (e.value == "New_Taipei") {
 					tempdata = New_Taipei;
 				}
 				if (e.value == "Hsinchu_City") {
@@ -126,7 +181,6 @@
 				for (let i = 0; i < predict_days; i++) {
 					data.push([dates[i], tempdata[i]]);
 				}
-
 				// create a data set
 				var dataSet = anychart.data.set(data);
 
@@ -137,7 +191,7 @@
 
 				// create a line chart
 				var chart = anychart.line();
-				e.value=value;
+				e.value = value;
 				// create the series and name them
 				var firstSeries = chart.line(firstSeriesData);
 				firstSeries.name(e.value);
@@ -161,6 +215,7 @@
 				firstSeries.hovered().markers().enabled(true).type("circle").size(4);
 				//secondSeries.hovered().markers().enabled(true).type("circle").size(4);
 				//thirdSeries.hovered().markers().enabled(true).type("circle").size(4);
+				firstSeries.normal().stroke("#7b60a2", 2.5);
 
 				// turn on crosshairs and remove the y hair
 				chart.crosshair().enabled(true).yStroke(null).yLabel(false);
@@ -174,7 +229,19 @@
 
 				// draw the resulting chart
 				chart.draw();
+				var emptychart = [];
 
+				var button = document.createElement('input');
+				button.type = 'button';
+				button.id = 'submit';
+				button.value = '清除';
+				button.className = 'btn';
+
+				button.onclick = function () {
+					chart.data(emptychart);
+				};
+				var container = document.getElementById('container');
+				container.appendChild(button);
 			});
 		}
 
@@ -1690,8 +1757,10 @@
 						</select>
 					</div>
 				</form>
-				<div id="container"></div>
+
+				<div id="container" style="z-index: 999; position: relative;"></div>
 				<!------------------------------------------------------3-------------------------------------------------------->
+				<!---->
 				<img src="https://github.com/zu-z/project/blob/main/%E9%A1%8F%E8%89%B2%E5%8D%80%E9%96%93.png?raw=true"
 					alt="感染人數變化" data-elem="pinchzoomer" class="img-responsive" align="right" id='img_color'>
 
@@ -1892,9 +1961,9 @@
 						<h2 class="box-body_0">基隆市</h2>
 						<p class="box-body_0">總共:{{ data_KEL }}人</p>
 					</div>
-				</div>
+				</div><!---->
 				<!------------------------------------------------------1-------------------------------------------------------->
-
+				<!---->
 				<div class="box" id="data_LNN">
 					<img src="https://github.com/zu-z/project/blob/main/%E9%80%A3%E6%B1%9F/img/1.png?raw=true"
 						alt="感染人數變化" data-elem="pinchzoomer" class="img-responsive" align="right" id='img_LNN'>
@@ -2092,6 +2161,7 @@
 						<p class="box-body_0">總共:{{ data_KEL }}人</p>
 					</div>
 				</div>
+				<!---->
 		</div>
 	</div>
 </body>
