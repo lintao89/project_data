@@ -1279,21 +1279,25 @@
                 
                 
                 <div class="tab-content-3" style="overflow-x:auto;overflow-y:auto;background:white;">
+				<br>
+				
 					<div align="left">
-						<h3> 
+						<h2> 
 							 &emsp;天數：<br>&emsp;&emsp;{{user_input}} <br> 
 							 &emsp;日期：<br>&emsp;&emsp;{{user_date}}<br> &emsp;&emsp;至 <br>&emsp;&emsp;{{user_date_}} 
-						</h3>
+						</h2>
 					</div>
 					<div align="left">
-						<h3>&emsp;全國總確診人數：
-						<br>&emsp;&emsp;共{{data_allin}}人</h3>
 					<br>
-						<h3>&emsp;全國當天確診人數：</h3>
+						<h2>&emsp;全國總確診人數：
+						<br>&emsp;&emsp;共{{data_allin}}人</h2>
+					<br>
+						<h2>&emsp;全國當天確診人數：</h2>
 						<div style="height:210px;width:330px;overflow-x:auto;overflow-y:auto;background:white;">
 							&emsp;{% for key,value in list_all.items() %}
-							 <h3>&emsp;{{ key }}：{{ value }}</h3>
+							 <h2>&emsp;{{ key }}：{{ value }}</h2>
 							&emsp;{% endfor %}
+							<br><br><br>
 						</div>
 					</div>
                    

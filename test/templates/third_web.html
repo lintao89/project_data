@@ -11,9 +11,9 @@
 		html,
 		body,
 		#container {
-			width: 100%;
-			height: 100%;
-			margin: 0;
+			width: 90%;
+			height: 90%;
+			margin: auto;
 			padding: 0;
 		}
 	</style>
@@ -24,7 +24,10 @@
 
 		function draw() {
 			anychart.onDocumentReady(function () {
-				//chart.clearInterval();
+				var div = document.createElement('div');
+				div.id = 'container';
+				document.body.appendChild(div);
+
 
 				var e = document.getElementById("balabala");
 				let value = e.value;
@@ -42,70 +45,31 @@
 
 				const dates = [today];
 
+
 				for (let i = 1; i < predict_days; i++) {//產生日期陣列
 					var flag = new Boolean(false);
 					let endDate = currentday;
 					endDate.setDate(endDate.getDate());
-					let dd = String(endDate.getDate() + i).padStart(2, '0');
-					let mm = String(endDate.getMonth() + 1).padStart(2, '0'); //January is 0!
+					let e_dd = String(endDate.getDate() + i).padStart(2, '0');
+					let e_mm = String(endDate.getMonth() + 1).padStart(2, '0'); //January is 0!
 					var yyyy = endDate.getFullYear();
-					
-					console.log(endDate.getDate() + i);
-					console.log(endDate.getMonth() + i);
-					let nextMonth;
-					let currentMonth=mm;
-					if (currentMonth === 12) {
-						nextMonth = 1;
-						currentYear += 1;
-					} else {
-						nextMonth = currentMonth + 1;
-					}
-					let monthMaxDay;
-					let bigMonth = [1, 3, 5, 7, 8, 10, 12];
+					e_dd = String(endDate.getDate() + i).padStart(2, '0');
+					//e_mm = String(endDate.getMonth() + 1).padStart(2, '0'); //January is 0!
 
-					// 2月
-					if (nextMonth === 2) {
-						// 潤月 || 非潤月
-						currentYear % 4 === 0 && currentYear % 100 !== 0 || currentYear % 400 === 0 ? monthMaxDay = 29 : monthMaxDay = 28;
-					}
-					else {
-						// 不是大月就是小月
-						bigMonth.includes(nextMonth) ? monthMaxDay = 31 : monthMaxDay = 30;
-					} 
-					/*
-					let currentYear = dayjs().year(); // 本年
-					let currentMonth = dayjs().month() + 1; // 本月，dayjs 的月份值是「該月 - 1」，因此要 +1 回來
-
-					// 本月如果是 1 月，上個月就要是 12 月，並且年份減 1
-					let nextMonth;
-					if (currentMonth === 12) {
-						nextMonth = 1;
-						currentYear += 1;
-					} else {
-						nextMonth = currentMonth + 1;
+					if (parseInt(e_dd) > 31) {
+						console.log("近來判斷啦");
+						flag = true;
+						let temp_i = 31 - i;
+						e_mm = '6';
+						//e_dd = '1';
+						e_dd = -(2 + temp_i - i);
 					}
 
-					// 計算每個月的最大天數
-					// 如果「年」能被 4整除且不被 100整除，或能被 400整除，2月就是 29天，否則為 28天
-					// 1, 3, 5, 7, 8, 10, 12 為大月，其它為小月
-					let monthMaxDay;
-					let bigMonth = [1, 3, 5, 7, 8, 10, 12];
+					console.log(e_mm);
+					console.log(e_dd);
 
-					// 2月
-					if (nextMonth === 2) {
-						// 潤月 || 非潤月
-						currentYear % 4 === 0 && currentYear % 100 !== 0 || currentYear % 400 === 0 ? monthMaxDay = 29 : monthMaxDay = 28;
-					}
-					else {
-						// 不是大月就是小月
-						bigMonth.includes(nextMonth) ? monthMaxDay = 31 : monthMaxDay = 30;
-					}
 
-					// 用 dayjs 進行補 0
-					let startDate = dayjs('${currentYear}-${nextMonth}+1').format('MM/DD') + '00:00';
-					endDate = dayjs('${currentYear}-${nextMonth}-${monthMaxDay}').format('MM/DD') + '00:00';
-*/
-					endDate = mm + '/' + dd;//+ '/'+ yyyy;
+					endDate = e_mm + '/' + e_dd;//+ '/'+ yyyy;
 					dates.push(endDate);
 				}
 
@@ -238,7 +202,8 @@
 				button.className = 'btn';
 
 				button.onclick = function () {
-					chart.data(emptychart);
+					var e = document.getElementById("container");
+					e.remove();
 				};
 				var container = document.getElementById('container');
 				container.appendChild(button);
@@ -1758,9 +1723,9 @@
 					</div>
 				</form>
 
-				<div id="container" style="z-index: 999; position: relative;"></div>
+				<!--<div id="container" style="z-index: 999; position: relative;"></div>-->
 				<!------------------------------------------------------3-------------------------------------------------------->
-				<!---->
+
 				<img src="https://github.com/zu-z/project/blob/main/%E9%A1%8F%E8%89%B2%E5%8D%80%E9%96%93.png?raw=true"
 					alt="感染人數變化" data-elem="pinchzoomer" class="img-responsive" align="right" id='img_color'>
 
